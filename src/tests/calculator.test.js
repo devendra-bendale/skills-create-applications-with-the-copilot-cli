@@ -17,7 +17,12 @@ describe('Calculator basic operations', () => {
     expect(calc.div(20, 5)).toBe(4)
   })
 
-  test('10 % 3 = 1 (modulo)', () => {
+  // Extended operation tests based on calc-extended-operations.png
+  test('5 % 2 = 1 (modulo)', () => {
+    expect(calc.modulo(5, 2)).toBe(1)
+  })
+
+  test('10 % 3 = 1 (modulo existing test)', () => {
     expect(calc.modulo(10, 3)).toBe(1)
   })
 
@@ -25,8 +30,16 @@ describe('Calculator basic operations', () => {
     expect(() => calc.modulo(1, 0)).toThrow('division by zero')
   })
 
-  test('2 ** 8 = 256 (power)', () => {
+  test('2 ** 3 = 8 (power)', () => {
+    expect(calc.power(2, 3)).toBe(8)
+  })
+
+  test('2 ** 8 = 256 (power existing test)', () => {
     expect(calc.power(2, 8)).toBe(256)
+  })
+
+  test('sqrt 16 = 4', () => {
+    expect(calc.squareRoot(16)).toBe(4)
   })
 
   test('sqrt 9 = 3', () => {
