@@ -17,6 +17,26 @@ describe('Calculator basic operations', () => {
     expect(calc.div(20, 5)).toBe(4)
   })
 
+  test('10 % 3 = 1 (modulo)', () => {
+    expect(calc.modulo(10, 3)).toBe(1)
+  })
+
+  test('modulo by zero throws error', () => {
+    expect(() => calc.modulo(1, 0)).toThrow('division by zero')
+  })
+
+  test('2 ** 8 = 256 (power)', () => {
+    expect(calc.power(2, 8)).toBe(256)
+  })
+
+  test('sqrt 9 = 3', () => {
+    expect(calc.squareRoot(9)).toBe(3)
+  })
+
+  test('sqrt of negative number throws error', () => {
+    expect(() => calc.squareRoot(-1)).toThrow('square root of negative number')
+  })
+
   test('floating point addition is close to expected', () => {
     expect(calc.add(0.1, 0.2)).toBeCloseTo(0.3, 10)
   })

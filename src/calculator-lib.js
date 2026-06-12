@@ -40,4 +40,26 @@ function div(a, b) {
   return a / b
 }
 
-module.exports = { add, sub, mul, div }
+function modulo(a, b) {
+  // remainder of a divided by b
+  ensureNumber(a)
+  ensureNumber(b)
+  if (b === 0) throw new Error('division by zero')
+  return a % b
+}
+
+function power(base, exponent) {
+  // base raised to exponent
+  ensureNumber(base)
+  ensureNumber(exponent)
+  return Math.pow(base, exponent)
+}
+
+function squareRoot(n) {
+  // square root with error for negative input
+  ensureNumber(n)
+  if (n < 0) throw new Error('square root of negative number')
+  return Math.sqrt(n)
+}
+
+module.exports = { add, sub, mul, div, modulo, power, squareRoot }
