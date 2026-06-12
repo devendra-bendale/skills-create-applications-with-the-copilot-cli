@@ -8,6 +8,7 @@
 // - mul : multiplication (a * b)
 // - div : division (a / b)
 
+const lib = require('./calculator-lib')
 const [,, op, aStr, bStr] = process.argv
 
 function usage() {
@@ -25,32 +26,33 @@ if (Number.isNaN(a) || Number.isNaN(b)) {
   process.exit(3)
 }
 
-function formatNumber(n) {
-  // Limit to 12 significant digits to avoid long floating output
-  return Number.isInteger(n) ? String(n) : Number(n.toPrecision(12)).toString()
-}
+try {
+  let result
+  switch (op) {
+    case 'add':
+      result = lib.add(a, b)
+      break
+    case 'sub':
+      result = lib.sub(a, b)
+      break
+    case 'mul':
+      result = lib.mul(a, b)
+      break
+    case 'div':
+      result = lib.div(a, b)
+      break
+    default:
+      console.error(`Unknown operation: ${op}`)
+      usage()
+  }
 
-let result
-switch (op) {
-  case 'add':
-    result = a + b
-    break
-  case 'sub':
-    result = a - b
-    break
-  case 'mul':
-    result = a * b
-    break
-  case 'div':
-    if (b === 0) {
-      console.error('Error: division by zero')
-      process.exit(4)
-    }
-    result = a / b
-    break
-  default:
-    console.error(`Unknown operation: ${op}`)
-    usage()
+  // Print result with reasonable precision
+  console.log(Number.isInteger(result) ? String(result) : Number(result.toPrecision(12)).toString())
+} catch (e) {
+  if (e.message === 'division by zero') {
+    console.error('Error: division by zero')
+    process.exit(4)
+  }
+  console.error('Error: ' + e.message)
+  process.exit(3)
 }
-
-console.log(formatNumber(result))
